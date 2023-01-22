@@ -1,0 +1,25 @@
+.cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  &__qty {
+    display: none;
+    font-size: 12px;
+    text-align: center;
+    line-height: 24px;
+    //padding: 3px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    flex-grow: 1;
+    width: 24px;
+    vertical-align: middle;
+    margin: 0 5px;
+  }
+  &__not-empty {
+    display: inline-block;
+    background-color: red;
+  }
+}
