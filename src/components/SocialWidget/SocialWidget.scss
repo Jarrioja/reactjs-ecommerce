@@ -1,0 +1,10 @@
+.social-widget {
+  a {
+    text-decoration: none;
+    color: white;
+    margin: 0 5px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

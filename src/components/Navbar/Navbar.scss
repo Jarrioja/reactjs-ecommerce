@@ -8,6 +8,24 @@
     max-width: 100%;
     color: white;
   }
+  &__header-bot {
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    nav {
+      width: 80%;
+      text-align: center;
+      .navbar-collapse {
+        justify-content: center;
+      }
+    }
+    .logo-wrapper {
+      width: 10%;
+    }
+    .user-menu {
+      width: 10%;
+    }
+  }
 }
 .logo {
   width: 80px;

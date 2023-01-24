@@ -1,12 +1,12 @@
-import React from "react";
-
+import ItemList from "./ItemList/ItemList";
 const ItemListContainer = ({ greeting }) => {
   return (
-    <div className='container-fluid'>
+    <section className='container-fluid'>
       <div className='container py-5'>
         <h1 className='text-center'>{greeting}</h1>
+        <ItemList />
       </div>
-    </div>
+    </section>
   );
 };
 
