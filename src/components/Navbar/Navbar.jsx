@@ -1,5 +1,4 @@
-//import React from "react";
-import React from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.scss";
 import { MenuItems } from "./MenuItems";
 import CartWidget from "../CartWidget/CartWidget";
@@ -7,6 +6,25 @@ import SocialWidget from "../SocialWidget/SocialWidget";
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
+  const [isVisible, setVisible] = useState(false);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    window.addEventListener("scroll", listenToScroll);
+    return () => window.removeEventListener("scroll", listenToScroll);
+  }, []);
+
+  const listenToScroll = () => {
+    let heightToShow = 50;
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    setHeight(winScroll);
+    console.log(isVisible);
+    if (winScroll > heightToShow) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
   return (
     <>
       <div className='header-nav__header-top container-fluid d-flex justify-content-between align-items-center'>
@@ -23,7 +41,11 @@ function Navbar() {
         </div>
       </div>
       <div className='header-nav__header-bot container-fluid d-flex  align-items-center navbar-light bg-light shadow-sm sticky-top'>
-        <div className='logo-wrapper opacity-0 invisible '>
+        <div
+          className={`logo-wrapper ${
+            isVisible ? "py-2" : "opacity-0 invisible "
+          } `}
+        >
           <a className='navbar-brand' href='/'>
             <img className='logo ' src='../tgk.svg' alt='' />
           </a>
@@ -49,13 +71,7 @@ function Navbar() {
                 {MenuItems.map((item, index) => {
                   return (
                     <li className='nav-item ' key={index}>
-                      <NavLink
-                        // className={({ isActive }) => {
-                        //   isActive ? item.cName : item.cName;
-                        // }}
-                        className={item.cName}
-                        to={item.url}
-                      >
+                      <NavLink className={item.cName} to={item.url}>
                         {item.tittle}
                       </NavLink>
                     </li>
@@ -65,8 +81,10 @@ function Navbar() {
             </div>
           </div>
         </nav>
-        <div className='user-menu opacity-0 invisible'>
-          <CartWidget />
+        <div className={`user-menu ${isVisible ? "" : "opacity-0 invisible"}`}>
+          <Link to='cart'>
+            <CartWidget />
+          </Link>
         </div>
       </div>
     </>
