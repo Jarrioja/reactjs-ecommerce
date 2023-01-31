@@ -4,9 +4,9 @@ export const MockData = [
     name: "Prosperidad para marcas personales",
     description: "Desripcion del curso 1",
     stock: 5,
-    cat: "Desarrollo personal",
-    image: "",
-    author: "",
+    category: "Desarrollo personal",
+    image: "https://via.placeholder.com/640x360.jpg",
+    author: "Mariela Villalobos",
   },
   {
     id: "2",

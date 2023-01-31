@@ -4,6 +4,7 @@ import "./Navbar.scss";
 import { MenuItems } from "./MenuItems";
 import CartWidget from "../CartWidget/CartWidget";
 import SocialWidget from "../SocialWidget/SocialWidget";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -11,16 +12,20 @@ function Navbar() {
       <div className='header-nav__header-top container-fluid d-flex justify-content-between align-items-center'>
         <SocialWidget />
         <div className='logo-wrapper'>
-          <img className='logo' src='./tgk.svg' alt='' />
+          <Link className='navbar-brand' to='/'>
+            <img className='logo' src='../tgk.svg' alt='' />
+          </Link>
         </div>
         <div className='user-menu'>
-          <CartWidget />
+          <Link to='cart'>
+            <CartWidget />
+          </Link>
         </div>
       </div>
       <div className='header-nav__header-bot container-fluid d-flex  align-items-center navbar-light bg-light shadow-sm sticky-top'>
         <div className='logo-wrapper opacity-0 invisible '>
-          <a className='navbar-brand' href='#'>
-            <img className='logo ' src='./tgk.svg' alt='' />
+          <a className='navbar-brand' href='/'>
+            <img className='logo ' src='../tgk.svg' alt='' />
           </a>
         </div>
         <nav className='navbar navbar-expand-lg bg-body-tertiary'>
@@ -44,9 +49,15 @@ function Navbar() {
                 {MenuItems.map((item, index) => {
                   return (
                     <li className='nav-item ' key={index}>
-                      <a className={item.cName} href={item.url}>
+                      <NavLink
+                        // className={({ isActive }) => {
+                        //   isActive ? item.cName : item.cName;
+                        // }}
+                        className={item.cName}
+                        to={item.url}
+                      >
                         {item.tittle}
-                      </a>
+                      </NavLink>
                     </li>
                   );
                 })}

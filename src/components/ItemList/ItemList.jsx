@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import { gFecth } from "../../../utils/gFecth";
-import IsLoading from "../../IsLoading/IsLoading";
+import IsLoading from "../IsLoading/IsLoading";
 import Item from "../Item/Item";
+import { getAllProducts } from "../../utils/getProducts";
 
 const ItemList = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    gFecth()
-      .then((result) => setProducts(result))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+    getAllProducts(setProducts).finally(() => setIsLoading(false));
   }, []);
 
-  console.log(products);
   return (
     <div className='d-flex justify-content-center my-5'>
       {isLoading ? (

@@ -5,10 +5,10 @@ import "./CartWidget.scss";
 
 const CartWidget = () => {
   return (
-    <a id='cart-trigger' href='#' className='cart'>
+    <div id='cart-trigger' href='#' className='cart'>
       <span className='cart__not-empty cart__qty'>20</span>
       <FontAwesomeIcon icon={faCartShopping} />
-    </a>
+    </div>
   );
 };
 
