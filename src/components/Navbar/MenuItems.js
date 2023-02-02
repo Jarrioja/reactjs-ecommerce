@@ -1,12 +1,12 @@
 export const MenuItems = [
   {
-    tittle: "Cursos",
-    url: "/categoria/cursos",
+    tittle: "Desarrollo personal",
+    url: "/categoria/desarrollo-personal",
     cName: "nav-link",
   },
   {
-    tittle: "Servicios",
-    url: "/categoria/servicios",
+    tittle: "Branding",
+    url: "/categoria/branding",
     cName: "nav-link",
   },
 ];
