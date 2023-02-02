@@ -1,1 +1,7 @@
-
+body {
+  background: radial-gradient(ellipse at bottom, #fff 0%, #ddd7c9 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  //height: 100vh;
+}
