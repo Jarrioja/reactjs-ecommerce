@@ -1,36 +1,36 @@
 import ItemCount from "../ItemCount/ItemCount";
+import "./ItemDetail.scss";
 
 function ItemDetail({ product }) {
   //onAdd
   //console.log(product);
-  const { name, author, description, stock, category, image, price } = product;
+  const { name, author, description, stock, categoryName, image, price } =
+    product;
 
   return (
     <>
       {/* <ItemCount onAdd={onAdd} initial={1} stock={0} /> */}
-      <div className='row'>
+      <div className='row align-items-start mx-3'>
         <div className='col-sm-12 col-md-8'>
-          <img src={image} alt='' />
+          <img className='img-fluid rounded' src={image} alt='' />
           <div className='mt-3 col-12 card'>
-            <div className='card-header'>¿Que aprenderas?</div>
+            <div className='card-header'>Detalles del curso</div>
             <div className='card-body'>
-              <li>Item</li>
-              <li>Item</li>
-              <li>Item</li>
+              <p>{description}</p>
             </div>
           </div>
         </div>
-        <div className='col-sm-12 col-md-4 card shadow-sm'>
-          <h1>{name}</h1>
-          <span>{category}</span>
-          <div className='author'>
-            <span className='author__name'>{author}</span>
-          </div>
-          <h2 className='price'>{`$ ${price}`}</h2>
-          <p>{description}</p>
-          <span>{`${stock} Cupos disponibles`}</span>
+        <div className='col-sm-12 col-md-4 card shadow-sm sticky-md-top product-data'>
+          <div className='card-body'>
+            <h1>{name}</h1>
+            <span>{categoryName}</span>
+            <div className='author'>
+              <span className='author__name'>{author}</span>
+            </div>
+            <h2 className='price'>{`$ ${price}`}</h2>
 
-          <ItemCount />
+            <ItemCount initial={1} stock={stock} />
+          </div>
         </div>
       </div>
     </>
