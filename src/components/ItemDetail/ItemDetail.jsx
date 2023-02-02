@@ -1,11 +1,13 @@
 import ItemCount from "../ItemCount/ItemCount";
 
 function ItemDetail({ product }) {
-  console.log(product);
-  const { name, author, description, stock, category, image } = product;
+  //onAdd
+  //console.log(product);
+  const { name, author, description, stock, category, image, price } = product;
 
   return (
     <>
+      {/* <ItemCount onAdd={onAdd} initial={1} stock={0} /> */}
       <div className='row'>
         <div className='col-sm-12 col-md-8'>
           <img src={image} alt='' />
@@ -24,6 +26,7 @@ function ItemDetail({ product }) {
           <div className='author'>
             <span className='author__name'>{author}</span>
           </div>
+          <h2 className='price'>{`$ ${price}`}</h2>
           <p>{description}</p>
           <span>{`${stock} Cupos disponibles`}</span>
 
