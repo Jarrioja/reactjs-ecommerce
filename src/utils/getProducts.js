@@ -25,4 +25,18 @@ const findProductById = async (productId, setState) => {
   }
 };
 
-export { getAllProducts, findProductById };
+const findByCategory = (productCat, array) => {
+  let products = array.filter((p) => p.slug === productCat);
+  return products;
+};
+
+const findProductsByCategory = async (productCat, setState) => {
+  try {
+    const products = await getProducts();
+    setState(findByCategory(productCat, products));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { getAllProducts, findProductById, findProductsByCategory };
