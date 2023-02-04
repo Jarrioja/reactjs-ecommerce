@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 const ItemCount = (itemData) => {
-  const { initial, stock } = itemData;
+  const { initial, stock, onAdd } = itemData;
   const [qty, setQty] = useState(initial);
   const addProduct = (num) => {
     if (stock >= qty) {
@@ -46,7 +46,7 @@ const ItemCount = (itemData) => {
       <div className='d-grid mt-3'>
         <button
           className='btn btn-primary'
-          // onClick={() => onAdd(qty)}
+          onClick={() => onAdd(qty)}
           disabled={stock === 0 ? true : null}
         >
           Añadir

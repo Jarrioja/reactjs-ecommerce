@@ -1,10 +1,16 @@
 import ItemCount from "../ItemCount/ItemCount";
 import "./ItemDetail.scss";
+import { useState } from "react";
+import AddedToCart from "../AddedToCart/AddedToCart";
 
 function ItemDetail({ product }) {
-  // Crear funcion onAdd
+  const onAdd = (qty) => {
+    setAddedToCart(true);
+    alert(`${qty} Cursos añadidos al carrito`);
+  };
   const { name, author, description, stock, categoryName, image, price } =
     product;
+  const [addedToCart, setAddedToCart] = useState(false);
 
   return (
     <>
@@ -26,8 +32,11 @@ function ItemDetail({ product }) {
               <span className='author__name'>{author}</span>
             </div>
             <h2 className='price'>{`$ ${price}`}</h2>
-
-            <ItemCount initial={1} stock={stock} />
+            {addedToCart ? (
+              <AddedToCart />
+            ) : (
+              <ItemCount initial={1} stock={stock} onAdd={onAdd} />
+            )}
           </div>
         </div>
       </div>
