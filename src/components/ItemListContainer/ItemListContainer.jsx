@@ -7,22 +7,22 @@ import {
 import IsLoading from "../IsLoading/IsLoading";
 import ItemList from "../ItemList/ItemList";
 const ItemListContainer = ({ greeting }) => {
-  const { categoria } = useParams();
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
-    if (categoria) {
-      setCategoryName(categoria);
-      findProductsByCategory(categoria, setProducts).finally(() => {
+    if (category) {
+      setCategoryName(category);
+      findProductsByCategory(category, setProducts).finally(() => {
         setIsLoading(false);
       });
     } else {
       setCategoryName("");
       getAllProducts(setProducts).finally(() => setIsLoading(false));
     }
-  }, [categoria]);
+  }, [category]);
 
   return (
     <section className='container-fluid'>

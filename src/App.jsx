@@ -23,10 +23,10 @@ function App() {
             element={<ItemListContainer greeting='Bienvenidos' />}
           />
           <Route
-            path='/categoria/:categoria'
-            element={<ItemListContainer greeting='Cursos disponibles' />}
+            path='/category/:category'
+            element={<ItemListContainer greeting='Cursos disponibles en' />}
           />
-          <Route path='/detail/:productId' element={<ItemDetailContainer />} />
+          <Route path='/product/:productId' element={<ItemDetailContainer />} />
           <Route path='/cart' element={<CartContainer />} />
           {/* <Route path='*' element={<Navigate to='/404' />} /> */}
         </Routes>

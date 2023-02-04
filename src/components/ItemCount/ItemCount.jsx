@@ -4,10 +4,7 @@ import { useState } from "react";
 const ItemCount = (itemData) => {
   const { initial, stock } = itemData;
   const [qty, setQty] = useState(initial);
-
   const addProduct = (num) => {
-    console.log(stock);
-    console.log(qty);
     if (stock >= qty) {
       setQty(qty + num);
     }

@@ -26,7 +26,7 @@ const findProductById = async (productId, setState) => {
 };
 
 const findByCategory = (productCat, array) => {
-  let products = array.filter((p) => p.slug === productCat);
+  let products = array.filter((p) => p.catId === productCat);
   return products;
 };
 

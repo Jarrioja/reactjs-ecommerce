@@ -18,7 +18,6 @@ function Navbar() {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
     setHeight(winScroll);
-    console.log(isVisible);
     if (winScroll > heightToShow) {
       setVisible(true);
     } else {
