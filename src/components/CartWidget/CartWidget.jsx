@@ -2,13 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import "./CartWidget.scss";
+import { useCartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
+  const { totalQty } = useCartContext();
+
   return (
-    <div id='cart-trigger' href='#' className='cart'>
-      <span className='cart__not-empty cart__qty'>20</span>
+    <Link id='cart-trigger' to='/cart' className='cart'>
+      <span className='cart__not-empty cart__qty'>{totalQty() || ""}</span>
       <FontAwesomeIcon icon={faCartShopping} />
-    </div>
+    </Link>
   );
 };
 

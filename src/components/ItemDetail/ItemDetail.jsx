@@ -1,16 +1,21 @@
 import ItemCount from "../ItemCount/ItemCount";
-import "./ItemDetail.scss";
-import { useState } from "react";
 import AddedToCart from "../AddedToCart/AddedToCart";
+import { useCartContext } from "../../context/CartContext";
+import { useState } from "react";
+
+import "./ItemDetail.scss";
 
 function ItemDetail({ product }) {
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { addToCart } = useCartContext();
+
   const onAdd = (qty) => {
     setAddedToCart(true);
-    alert(`${qty} Cursos añadidos al carrito`);
+    addToCart({ ...product, qty: qty });
   };
+
   const { name, author, description, stock, categoryName, image, price } =
     product;
-  const [addedToCart, setAddedToCart] = useState(false);
 
   return (
     <>

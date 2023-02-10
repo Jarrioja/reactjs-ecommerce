@@ -7,7 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   const [isVisible, setVisible] = useState(false);
-  const [height, setHeight] = useState(0);
+  // const [height, setHeight] = useState(0);
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
@@ -17,7 +17,7 @@ function Navbar() {
     let heightToShow = 50;
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
-    setHeight(winScroll);
+    // setHeight(winScroll);
     if (winScroll > heightToShow) {
       setVisible(true);
     } else {
@@ -34,9 +34,7 @@ function Navbar() {
           </Link>
         </div>
         <div className='user-menu'>
-          <Link to='cart'>
-            <CartWidget />
-          </Link>
+          <CartWidget />
         </div>
       </div>
       <div className='header-nav__header-bot container-fluid d-flex  align-items-center navbar-light bg-light shadow-sm sticky-top'>
@@ -81,9 +79,7 @@ function Navbar() {
           </div>
         </nav>
         <div className={`user-menu ${isVisible ? "" : "opacity-0 invisible"}`}>
-          <Link to='cart'>
-            <CartWidget />
-          </Link>
+          <CartWidget />
         </div>
       </div>
     </>
