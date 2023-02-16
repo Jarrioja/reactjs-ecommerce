@@ -1,11 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {
-  findProductsByCategory,
-  getAllProducts,
-} from "../../utils/getProducts";
+// import {
+//   findProductsByCategory,
+//   getAllProducts,
+// } from "../../utils/getProducts";
 import IsLoading from "../IsLoading/IsLoading";
 import ItemList from "../ItemList/ItemList";
+import {
+  getAllProducts,
+  findProductsByCategory,
+} from "../../utils/getFiresotreProducts";
+
 const ItemListContainer = ({ greeting }) => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
@@ -15,6 +20,7 @@ const ItemListContainer = ({ greeting }) => {
     setIsLoading(true);
     if (category) {
       setCategoryName(category);
+
       findProductsByCategory(category, setProducts).finally(() => {
         setIsLoading(false);
       });
@@ -22,13 +28,14 @@ const ItemListContainer = ({ greeting }) => {
       setCategoryName("");
       getAllProducts(setProducts).finally(() => setIsLoading(false));
     }
+    console.log(products);
   }, [category]);
 
   return (
     <section className='container-fluid'>
       <div className='container py-5'>
         <h1 className='text-center'>{greeting}</h1>
-        <h1 className='text-center'>{categoryName}</h1>
+        <h2 className='text-center'>{categoryName}</h2>
         {isLoading ? <IsLoading /> : <ItemList products={products} />}
       </div>
     </section>

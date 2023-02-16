@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { findProductById } from "../../utils/getProducts";
+import { findProductById } from "../../utils/getFiresotreProducts";
 import { useState, useEffect } from "react";
 import IsLoading from "../IsLoading/IsLoading";
 

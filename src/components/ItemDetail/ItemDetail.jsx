@@ -4,11 +4,12 @@ import { useCartContext } from "../../context/CartContext";
 import { useState } from "react";
 
 import "./ItemDetail.scss";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 function ItemDetail({ product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const { addToCart } = useCartContext();
-
+  // console.log(product);
   const onAdd = (qty) => {
     setAddedToCart(true);
     addToCart({ ...product, qty: qty });
