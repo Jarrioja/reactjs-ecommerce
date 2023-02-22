@@ -4,19 +4,26 @@ import { useCartContext } from "../../context/CartContext";
 import { useState } from "react";
 
 import "./ItemDetail.scss";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function ItemDetail({ product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const { addToCart } = useCartContext();
-  // console.log(product);
   const onAdd = (qty) => {
     setAddedToCart(true);
     addToCart({ ...product, qty: qty });
   };
 
-  const { name, author, description, stock, categoryName, image, price } =
-    product;
+  const {
+    name,
+    author,
+    description,
+    stock,
+    categoryName,
+    image,
+    price,
+    catId,
+  } = product;
 
   return (
     <>
@@ -33,7 +40,7 @@ function ItemDetail({ product }) {
         <div className='col-sm-12 col-md-4 card shadow-sm sticky-md-top product-data'>
           <div className='card-body'>
             <h1>{name}</h1>
-            <span>{categoryName}</span>
+            <Link to={`/category/${catId}`}>{categoryName}</Link>
             <div className='author'>
               <span className='author__name'>{author}</span>
             </div>

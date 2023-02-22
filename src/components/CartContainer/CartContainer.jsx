@@ -4,6 +4,7 @@ import {
   getFirestore,
   updateDoc,
 } from "firebase/firestore";
+import validator from "validator";
 import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
@@ -12,12 +13,14 @@ import ItemCart from "../ItemCart/ItemCart";
 const CartContainer = () => {
   const navigate = useNavigate();
   const { cartList, emptyCart, totalPrice } = useCartContext();
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     emailValidation: "",
   });
+
   const handlerOnChange = (e) => {
     e.target.name;
     e.target.value;
@@ -31,80 +34,123 @@ const CartContainer = () => {
     e.preventDefault();
     const order = {};
     //Validar formData
-    order.buyer = formData;
-    order.items = cartList.map(({ id, name, price }) => ({ id, name, price }));
-    order.total = totalPrice();
-    console.log(order);
-    const db = getFirestore();
-    const orderCollections = collection(db, "orders");
+    if (
+      validator.equals(formData.email, formData.emailValidation) &&
+      !validator.isEmpty(formData.emailValidation)
+    ) {
+      order.buyer = formData;
+      order.items = cartList.map(({ id, name, price }) => ({
+        id,
+        name,
+        price,
+      }));
+      order.total = totalPrice();
 
-    const addOrder = await addDoc(orderCollections, order).finally(() => {
-      emptyCart();
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        emailValidation: "",
+      const db = getFirestore();
+      const orderCollections = collection(db, "orders");
+      const addOrder = await addDoc(orderCollections, order).finally(() => {
+        emptyCart();
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          emailValidation: "",
+        });
       });
-    });
-    console.log(addOrder.id);
-    navigate(`/thank-you/${addOrder.id}`);
+      navigate(`/thank-you/${addOrder.id}`);
+    } else {
+      alert("Email no coincide");
+    }
   };
 
   if (cartList.length === 0) {
     return (
       <>
-        <h2> No veo nada</h2>
-        <Link to='/'>Regresar a la tienda</Link>
+        <section className='container'>
+          <div className='row justify-content-center mt-5'>
+            <div className='col col-sm-12 col-md-6 p-2'>
+              <h2> Carrito vacio</h2>
+              <Link className='btn btn-primary' to='/'>
+                Regresar a la tienda
+              </Link>
+            </div>
+          </div>
+        </section>
       </>
     );
   }
   return (
     <>
-      <div className='list-group'>
-        {cartList.map((p) => (
-          <ItemCart key={p.id} p={p} />
-        ))}
-      </div>
-      <h3>{totalPrice()}</h3>
-      <form onSubmit={createOrder}>
-        <input
-          type='text'
-          name='name'
-          placeholder='Ingresa tu Nombre'
-          value={formData.name}
-          onChange={handlerOnChange}
-        />
-        <br />
-        <input
-          type='text'
-          name='phone'
-          placeholder='Ingresa tu telefono'
-          value={formData.phone}
-          onChange={handlerOnChange}
-        />
-        <br />
-        <input
-          type='email'
-          name='email'
-          placeholder='Ingresa tu email'
-          value={formData.email}
-          onChange={handlerOnChange}
-        />
-        <br />
-        <input
-          type='email'
-          name='emailValidation'
-          placeholder='Repite tu email'
-          value={formData.emailValidation}
-          onChange={handlerOnChange}
-        />
-        <br />
-        <button className='btn btn-primary'> Finalizar Compra</button>
-      </form>
-      <button className='btn btn-outline-danger' onClick={emptyCart}>
-        Vaciar Carrito
-      </button>
+      <section className='container'>
+        <div className='row justify-content-center mt-5 '>
+          <div className='col-sm-12 col-md-8 '>
+            <div className='list-group shadow'>
+              {cartList.map((p) => (
+                <ItemCart key={p.id} p={p} />
+              ))}
+            </div>
+            <div className='d-flex align-items-center mt-2 gap-2 mb-4'>
+              <Link to='/' className='btn btn-secondary'>
+                Continuar comprando
+              </Link>
+              <button className='btn btn-outline-danger ' onClick={emptyCart}>
+                Vaciar Carrito
+              </button>
+            </div>
+          </div>
+          <div className='col-sm-12 col-md-4'>
+            <div className='col-12 bg-white p-3 rounded shadow sticky'>
+              <h3>Total: {totalPrice()}</h3>
+              <form onSubmit={createOrder}>
+                <div className='from-group'>
+                  <input
+                    type='text'
+                    name='name'
+                    placeholder='Ingresa tu nombre'
+                    value={formData.name}
+                    onChange={handlerOnChange}
+                    className='form-control'
+                  />
+                </div>
+                <div className='from-group pt-2'>
+                  <input
+                    type='text'
+                    name='phone'
+                    placeholder='Ingresa tu telefono'
+                    value={formData.phone}
+                    onChange={handlerOnChange}
+                    className='form-control'
+                  />
+                </div>
+                <div className='from-group pt-2'>
+                  <input
+                    type='email'
+                    name='email'
+                    placeholder='Ingresa tu email'
+                    value={formData.email}
+                    onChange={handlerOnChange}
+                    className='form-control'
+                  />
+                </div>
+                <div className='from-group pt-2'>
+                  <input
+                    type='email'
+                    name='emailValidation'
+                    placeholder='Valida tu email'
+                    value={formData.emailValidation}
+                    onChange={handlerOnChange}
+                    className='form-control'
+                  />
+                </div>
+
+                <button className={`btn btn-primary mt-2  w-100 btn-lg}`}>
+                  Finalizar Compra
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

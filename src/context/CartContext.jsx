@@ -34,7 +34,10 @@ export const CartContextProvider = ({ children }) => {
 
   //Precio Total
   const totalPrice = () =>
-    cartList.reduce((prev, act) => prev + act.qty * act.price, 0);
+    cartList.reduce(
+      (prev, act) => Math.round((prev + act.qty * act.price) * 100) / 100,
+      0
+    );
 
   //Cantidad Total
   const totalQty = () =>

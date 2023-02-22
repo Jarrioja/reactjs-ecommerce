@@ -9,6 +9,7 @@ import ItemList from "../ItemList/ItemList";
 import {
   getAllProducts,
   findProductsByCategory,
+  getCategoryName,
 } from "../../utils/getFiresotreProducts";
 
 const ItemListContainer = ({ greeting }) => {
@@ -18,9 +19,9 @@ const ItemListContainer = ({ greeting }) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
-    if (category) {
-      setCategoryName(category);
 
+    if (category) {
+      getCategoryName(category, setCategoryName);
       findProductsByCategory(category, setProducts).finally(() => {
         setIsLoading(false);
       });
@@ -28,7 +29,6 @@ const ItemListContainer = ({ greeting }) => {
       setCategoryName("");
       getAllProducts(setProducts).finally(() => setIsLoading(false));
     }
-    console.log(products);
   }, [category]);
 
   return (

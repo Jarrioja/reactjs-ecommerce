@@ -39,9 +39,7 @@ const findProductById = async (productId, setState) => {
   try {
     const db = getFirestore();
     const query = doc(db, "products", productId);
-    getDoc(query)
-      .then((res) => setState({ id: res.id, ...res.data() }))
-      .catch((err) => console.log(err));
+    getDoc(query).then((res) => setState({ id: res.id, ...res.data() }));
   } catch (err) {
     console.log(err);
   }
@@ -61,41 +59,35 @@ const findProductsByCategory = async (productCat, setState) => {
         ...p.data(),
       })
     );
-    console.log(`findProductsByCategory: ${products}`);
     setState(products);
   } catch (err) {
     console.log(err);
   }
 };
 
-// Producto individual.
+const getCategoryName = async (productCat, setState) => {
+  try {
+    if (productCat === "") {
+      setState("");
+    } else {
+      const queryFilter = query(
+        await getProducts(),
+        where("catId", "==", productCat)
+      );
+      const res = await getDocs(queryFilter);
+      res.docs.map((c) => {
+        setState(c.data().categoryName);
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-//   const db = getFirestore();
-//   const query = doc(db, "products", "CapfnAB3aIEUslrPGshr");
-//   getDoc(query)
-//     .then(
-//       (res) => setProduct({id: res.id, ...res.data()})
-//       //([])
-//     )
-//     .catch((err) => console.log(err));
-
-// Todos
-
-//   const db = getFirestore();
-//   const queryCollections = collection(db, "products");
-//   getDocs(queryCollections).then((res) =>
-//     setProducts(res.docs.map((p) => ({ id: res.id, ...res.data() })))
-//   ).catch((err) => console.log(err));
-
-//Todos filtrados
-
-// const db = getFirestore();
-// const queryCollections = collection(db, "products");
-// const queryFilter = query(queryCollections, where("catId", "===", catId));
-// getDocs(queryFilter)
-//   .then((res) =>
-//     setProducts(res.docs.map((p) => ({ id: p.id, ...p.data() })))
-//   )
-//   .catch((err) => console.log(err));
-
-export { getAllProducts, findProductById, findProductsByCategory, getProducts };
+export {
+  getAllProducts,
+  findProductById,
+  findProductsByCategory,
+  getProducts,
+  getCategoryName,
+};
