@@ -1,4 +1,3 @@
-import { MockData } from "./MockData";
 import {
   getFirestore,
   doc,
