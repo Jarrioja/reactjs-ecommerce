@@ -1,10 +1,12 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { useCartContext } from "../../context/CartContext";
+
 import ItemCount from "../ItemCount/ItemCount";
 import AddedToCart from "../AddedToCart/AddedToCart";
-import { useCartContext } from "../../context/CartContext";
-import { useState } from "react";
 
 import "./ItemDetail.scss";
-import { Link } from "react-router-dom";
 
 function ItemDetail({ product }) {
   const [addedToCart, setAddedToCart] = useState(false);

@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Lottie from "lottie-react";
+
 import completeAnimation from "../../assets/successCheck.json";
 
 const ThankYou = () => {

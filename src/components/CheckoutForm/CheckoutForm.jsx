@@ -1,7 +1,6 @@
 import React from "react";
 
 const CheckoutForm = ({ formData, handlerOnChange, createOrder }) => {
-  console.log(formData);
   return (
     <form onSubmit={(e) => createOrder(e)}>
       <div className='from-group'>
@@ -45,7 +44,7 @@ const CheckoutForm = ({ formData, handlerOnChange, createOrder }) => {
         />
       </div>
 
-      <button className={`btn btn-primary mt-2  w-100 btn-lg}`}>
+      <button className='btn btn-primary mt-2  w-100 btn-lg'>
         Finalizar Compra
       </button>
     </form>

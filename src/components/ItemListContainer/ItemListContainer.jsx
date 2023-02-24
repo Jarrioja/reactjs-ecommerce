@@ -1,25 +1,23 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import {
-//   findProductsByCategory,
-//   getAllProducts,
-// } from "../../utils/getProducts";
-import IsLoading from "../IsLoading/IsLoading";
-import ItemList from "../ItemList/ItemList";
+
 import {
   getAllProducts,
   findProductsByCategory,
   getCategoryName,
 } from "../../utils/getFiresotreProducts";
 
+import IsLoading from "../IsLoading/IsLoading";
+import ItemList from "../ItemList/ItemList";
+
 const ItemListContainer = ({ greeting }) => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setIsLoading(true);
-
     if (category) {
       getCategoryName(category, setCategoryName);
       findProductsByCategory(category, setProducts).finally(() => {

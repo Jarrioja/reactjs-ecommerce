@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const AddedToCart = () => {
   return (
     <div className='d-grid mt-3'>

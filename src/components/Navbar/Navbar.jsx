@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import "./Navbar.scss";
+import { Link, NavLink } from "react-router-dom";
+
 import { MenuItems } from "./MenuItems";
 import CartWidget from "../CartWidget/CartWidget";
 import SocialWidget from "../SocialWidget/SocialWidget";
-import { Link, NavLink } from "react-router-dom";
+
+import "./Navbar.scss";
 
 function Navbar() {
+  /* Hide top row of the header on scroll */
   const [isVisible, setVisible] = useState(false);
-  // const [height, setHeight] = useState(0);
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
@@ -17,7 +19,6 @@ function Navbar() {
     let heightToShow = 50;
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
-    // setHeight(winScroll);
     if (winScroll > heightToShow) {
       setVisible(true);
     } else {

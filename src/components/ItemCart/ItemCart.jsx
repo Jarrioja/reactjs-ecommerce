@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+
 import { useCartContext } from "../../context/CartContext";
+
 import "./ItemCart.scss";
 
 const ItemCart = ({ p }) => {
@@ -15,7 +15,7 @@ const ItemCart = ({ p }) => {
         <div className='d-flex w-100 justify-content-between'>
           <h5 className='mb-1'>{p.name}</h5>
           <div className='d-flex flex-column'>
-            <span>{`$${p.qty * p.price}`}</span>
+            <span>{`$${Math.round(p.qty * p.price * 100) / 100}`}</span>
           </div>
         </div>
         <div className='d-flex w-100 justify-content-between py-1'>

@@ -1,8 +1,10 @@
 import React from "react";
-import "./SocialWidget.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+import "./SocialWidget.scss";
+
 function SocialWidget() {
   return (
     <div className='social-widget'>

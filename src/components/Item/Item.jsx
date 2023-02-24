@@ -1,8 +1,9 @@
-import "./Item.scss";
 import { Link } from "react-router-dom";
 
+import "./Item.scss";
+
 const Item = ({ item }) => {
-  const { id, name, description, stock, cat, image, author, price } = item;
+  const { id, name, image, price } = item;
   return (
     <div className='card col shadow-sm rounded' key={id}>
       <img src={image} alt='' className='card-img-top' />

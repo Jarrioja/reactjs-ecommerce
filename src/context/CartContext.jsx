@@ -1,12 +1,13 @@
 import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
 import validator from "validator";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 export const CartContext = createContext([]);
 export const useCartContext = () => useContext(CartContext);
 
 export const CartContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [cartList, setCartList] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -15,11 +16,11 @@ export const CartContextProvider = ({ children }) => {
     emailValidation: "",
   });
 
-  //Verificar si ya esta en el carrito
+  //Check if it is already in the cart
   const existOnCart = (newProduct) =>
     cartList.findIndex((p) => p.id === newProduct.id);
 
-  //Añadir al carrito
+  //Add to Cart
   const addToCart = (newProduct) => {
     let index = existOnCart(newProduct);
     if (index > -1) {
@@ -29,29 +30,31 @@ export const CartContextProvider = ({ children }) => {
       setCartList([...cartList, newProduct]);
     }
   };
-  //Vaciar carrito
+
+  //Empty cart
   const emptyCart = () => {
     setCartList([]);
   };
 
-  //Eliminar 1 producto
+  //Remove 1 product
   const removeProductById = (productId) => {
     let index = existOnCart(productId);
     cartList.splice(index, 1);
     setCartList([...cartList]);
   };
 
-  //Precio Total
+  //Get the total price
   const totalPrice = () =>
     cartList.reduce(
       (prev, act) => Math.round((prev + act.qty * act.price) * 100) / 100,
       0
     );
 
-  //Cantidad Total
+  //Get the total quantity
   const totalQty = () =>
     cartList.reduce((acumulador, actual) => acumulador + actual.qty, 0);
 
+  //Show form changes
   const handlerOnChange = (e) => {
     e.target.name;
     e.target.value;
@@ -60,11 +63,11 @@ export const CartContextProvider = ({ children }) => {
       [e.target.name]: e.target.value,
     });
   };
-  const navigate = useNavigate();
+
+  // Create Order on submit
   const createOrder = async (e) => {
     e.preventDefault();
     const order = {};
-    //Validar formData
     if (
       validator.equals(formData.email, formData.emailValidation) &&
       !validator.isEmpty(formData.email) &&
@@ -102,12 +105,12 @@ export const CartContextProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartList,
+        formData,
         addToCart,
         emptyCart,
         removeProductById,
         totalPrice,
         totalQty,
-        formData,
         setFormData,
         handlerOnChange,
         createOrder,

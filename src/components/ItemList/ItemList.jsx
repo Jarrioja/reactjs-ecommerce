@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-
 import Item from "../Item/Item";
-import { getAllProducts } from "../../utils/getProducts";
 
 const ItemList = ({ products }) => {
   return (
