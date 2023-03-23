@@ -4,6 +4,10 @@
 
 ![alt text](https://github.com/Jarrioja/reactjs-ecommerce/blob/main/public/demo.gif?raw=true)
 
+## Descripcion
+
+El proyecto final consiste en el desarrollo de una plataforma ecommerce en React para la venta de cursos en línea. La plataforma permite a los usuarios navegar por los cursos disponibles, agregar cursos a su carrito de compras y procesar el pedido.
+
 ## **Run with**
 
 ```javascript
